@@ -139,12 +139,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-if test -f ~/.conda_init ; then
-	source ~/.conda_init
+if test -f ~/.local_init ; then
+	source ~/.local_init
 fi
-
-source /opt/intel/impi/2019.5.281/intel64/bin/mpivars.sh
-source /opt/intel/compilers_and_libraries_2019.5.281/linux/bin/compilervars.sh intel64
-source /opt/intel/compilers_and_libraries_2019.5.281/linux/mkl/bin/mklvars.sh intel64
 
 alias watch_training="watch -d -n 0.5 ' nvidia-smi ; tail ~/Crystal_VAE/*.log '"
