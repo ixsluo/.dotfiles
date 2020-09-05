@@ -43,8 +43,9 @@ function git-branch {
 
     # Set arrow icon based on status against remote.
     function remote_p {
+        git_status="$(git status 2>/dev/null)"
         local remote
-        remote_pattern="# Your branch is (ahead|behind)+ "
+        remote_pattern="Your branch is (ahead|behind)+ "
         if [[ ${git_status} =~ ${remote_pattern} ]]; then
             if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
                 remote="↑"
