@@ -1,0 +1,91 @@
+#!/bin/bash
+
+function git-branch {
+              RED="\033[0;31m"
+           YELLOW="\033[1;33m"
+            GREEN="\033[0;32m"
+             BLUE="\033[1;34m"
+        LIGHT_RED="\033[1;31m"
+      LIGHT_GREEN="\033[1;32m"
+            WHITE="\033[1;37m"
+       LIGHT_GRAY="\033[0;37m"
+               NC="\e[0m"
+
+    function status_color {
+        git_status="$(git status 2>/dev/null)"
+        local state
+
+        #if [[ ${git_status} =~ "working directory clean" ]] ; then
+        if [[ ${git_status} =~ 'nothing to commit' ]] ; then
+            # GREEN
+            state=$GREEN
+        elif [[ ${git_status} =~ 'Changes to be committed' ]] ; then
+            # YELLOW
+            state=$YELLOW
+        else
+            # LIGHT RED
+            state=$LIGHT_RED
+        fi
+        echo ${state}
+    }
+
+    # Get the name of the branch.
+    function branch_name {
+        git_status="$(git status 2>/dev/null)"
+        local branch
+        branch_pattern1="^(# )?On branch ([^${IFS}]*)"
+        branch_pattern2="^(# )?HEAD detached at ([^${IFS}]*)"
+        if [[ ${git_status} =~ ${branch_pattern1} || ${git_status} =~ ${branch_pattern2} ]]; then
+            branch="(${BASH_REMATCH[2]})"
+        fi
+        echo "${branch}";
+    }
+
+    # Set arrow icon based on status against remote.
+    function remote_p {
+        local remote
+        remote_pattern="# Your branch is (ahead|behind)+ "
+        if [[ ${git_status} =~ ${remote_pattern} ]]; then
+            if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+                remote="↑"
+            else
+                remote="↓"
+            fi
+        else
+            remote=""
+        fi
+        diverge_pattern="# Your branch and (.*) have diverged"
+        if [[ ${git_status} =~ ${diverge_pattern} ]]; then
+            remote="↕"
+        fi
+        echo ${remote}
+    }
+
+    function parse_git_dirty {
+        local git_status=$(git status 2> /dev/null | tail -n1) || $(git status 2> /dev/null | head -n 2 | tail -n1);
+        local git_now;
+        if [[ "$git_status" != "" ]]; then
+            #local git_now; # 标示
+        #echo "${git_status}"
+            if [[ "$git_status" =~ nothing\ to\ commit || "$git_status" =~  Your\ branch\ is\ up\-to\-date\ with ]]; then
+                git_now="=";
+            elif [[ "$git_status" =~ no\ changes\ added\ to\ commit ]]; then
+                git_now='~';
+            elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]; then #Changes to be committed
+                git_now='*';
+            elif [[ "$git_status" =~ Untracked\ files ]]; then
+                git_now="+";
+            elif [[ "$git_status" =~ Your\ branch\ is\ up\-to\-date\ with ]]; then
+                git_now="#";
+            fi
+           # echo "${git_now}";
+        elif [[ "$git_status" == "" ]]; then
+        git_now="#";
+        fi
+       echo "${git_now}"
+    }
+    BRANCH="$(status_color)$(branch_name)$(remote_p)$(parse_git_dirty)${NC}"
+    echo -e $BRANCH
+}
+
+export PS1="${LIGHT_GREEN}\u@\h${NC}:${BLUE}\w${NC} \$(git-branch) \$ "

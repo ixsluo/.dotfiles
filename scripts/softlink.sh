@@ -7,3 +7,4 @@ ln -sf ~/.dotfiles/app_conf/.vimrc             ~/.vimrc
 ln -sf ~/.dotfiles/app_conf/.czrc              ~/.czrc
 ln -sf ~/.dotfiles/app_conf/.condarc           ~/.condarc
 ln -sf ~/.dotfiles/git/.gitconfig              ~/.gitconfig
+ln -sf ~/.dotfiles/git/.git_prompt             ~/.git_prompt
