@@ -1,6 +1,5 @@
 #!/bin/bash
 
-function git-branch {
               RED="\033[0;31m"
            YELLOW="\033[1;33m"
             GREEN="\033[0;32m"
@@ -10,6 +9,8 @@ function git-branch {
             WHITE="\033[1;37m"
        LIGHT_GRAY="\033[0;37m"
                NC="\e[0m"
+
+function git-branch {
 
     function status_color {
         git_status="$(git status 2>/dev/null)"
