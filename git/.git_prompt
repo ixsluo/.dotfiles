@@ -26,6 +26,7 @@
 # 3. Change color
 # 4. Remove "# " in the head of remote_pattern
 # 5. Add conda env by ${CONDA_PROMPT_MODIFIER}
+# 6. Add git symbol ahead of branch name
 
 # Set the full bash prompt.
 function set_bash_prompt () {
@@ -92,8 +93,21 @@ function set_bash_prompt () {
             branch=${BASH_REMATCH[2]}
         fi
 
+      # Git symbol
+        if [[ "$git_status" =~ nothing\ to\ commit || "$git_status" =~  Your\ branch\ is\ up\-to\-date\ with ]]; then
+            git_now="=";
+        elif [[ "$git_status" =~ no\ changes\ added\ to\ commit ]]; then
+            git_now='~';
+        elif [[ "$git_status" =~ Changes\ to\ be\ committed ]]; then #Changes to be committed
+            git_now='*';
+        elif [[ "$git_status" =~ Untracked\ files ]]; then
+            git_now="+";
+        elif [[ "$git_status" =~ Your\ branch\ is\ up\-to\-date\ with ]]; then
+            git_now="#";
+        fi
+
       # Set the final branch string.
-      BRANCH="${state}(${branch})${remote}${NC} "
+      BRANCH="${state}${git_now}(${branch})${remote}${NC} "
     }
 
     # Return the prompt symbol to use, colorized based on the return value of the
