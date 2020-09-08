@@ -24,6 +24,7 @@
 # 1. Add branch name recognization when on detach branch
 # 2. Comment virtualenv
 # 3. Change color
+# 4. Remove "# " in the head of remote_pattern
 
 # Set the full bash prompt.
 function set_bash_prompt () {
@@ -67,7 +68,7 @@ function set_bash_prompt () {
         fi
 
         # Set arrow icon based on status against remote.
-        remote_pattern="# Your branch is (ahead|behind)+ "
+        remote_pattern="Your branch is (ahead|behind)+ "
         if [[ ${git_status} =~ ${remote_pattern} ]]; then
             if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
                 remote="↑"
