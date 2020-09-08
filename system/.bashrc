@@ -119,9 +119,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# git alias
-alias gitlog="git log --decorate --oneline --graph --all"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('~/apps/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -137,8 +134,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-if test -f ~/.local_init ; then
-	source ~/.local_init
+if test -f ~/.localrc ; then
+	source ~/.localrc
 fi
 
-alias watch_training="watch -d -n 0.5 ' nvidia-smi ; tail ~/Crystal_VAE/*.log '"
