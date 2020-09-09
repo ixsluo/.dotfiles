@@ -55,3 +55,7 @@ set listchars=tab:‹-›,trail:¬,precedes:«,extends:»
 hi SpecialKey guifg=darkgrey ctermfg=darkgrey
 set laststatus=2
 set ruler
+
+" Jump to the last position when reopening
+" Notice   !g`\! rather than !g'\!
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
