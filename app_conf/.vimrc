@@ -1,3 +1,8 @@
+" for list and listchars
+scriptencoding utf-8
+set encoding=utf-8
+
+syntax on
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
