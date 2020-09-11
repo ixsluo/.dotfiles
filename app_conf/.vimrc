@@ -52,7 +52,8 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set colorcolumn=81
+let &colorcolumn=81
+highlight colorcolumn ctermbg=lightcyan
 set nowrap
 set paste
 set list
@@ -60,6 +61,7 @@ set listchars=tab:‹-›,trail:¬,precedes:«,extends:»
 hi SpecialKey guifg=darkgrey ctermfg=darkgrey
 set laststatus=2
 set ruler
+set backspace=2
 
 " Jump to the last position when reopening
 " Notice   !g`\! rather than !g'\!
