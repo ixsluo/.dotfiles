@@ -1,5 +1,3 @@
 if test -f .bashrc ; then
-	source .bashrc
+    source .bashrc
 fi
-
-export PATH="$HOME/bin:$PATH"

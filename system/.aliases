@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alias gitlog="git log --decorate --oneline --graph --all"

@@ -1,35 +1,35 @@
 #!/bin/sh
 
 if [ "$#" -lt 1 ] ; then
-	echo "run: missing parameters"
-	echo "Usage: ./run [OPTIONs]"
-	echo ""
-	echo 'Try `./run --help` for more options.'
+    echo "run: missing parameters"
+    echo "Usage: ./run [OPTIONs]"
+    echo ""
+    echo 'Try `./run --help` for more options.'
 fi
 
 for var in $@
 do
-	case $var in
-		check)
-			sh scripts/env_check.sh
-			;;
-		install)
-			sh scripts/install.sh
-			;;
-		link)
-			sh scripts/softlink.sh
-			;;
-		--help)
-			echo "usage: $0 [--help] [check] [install] [link] "
-			echo ''
-			echo "--help      show help informations"
-			echo "check       check environment"
-			echo "install     install packages"
-			echo "link        soft link dotfiles"
-			;;
-		*)
-			echo 'Unsolved parameters'
-			echo 'Use --help for more informations'
-			;;
-	esac
+    case $var in
+        check)
+            sh scripts/env_check.sh
+            ;;
+        install)
+            sh scripts/install.sh
+            ;;
+        link)
+            sh scripts/softlink.sh
+            ;;
+        --help)
+            echo "usage: $0 [--help] [check] [install] [link] "
+            echo ''
+            echo "--help      show help informations"
+            echo "check       check environment"
+            echo "install     install packages"
+            echo "link        soft link dotfiles"
+            ;;
+        *)
+            echo 'Unsolved parameters'
+            echo 'Use --help for more informations'
+            ;;
+    esac
 done

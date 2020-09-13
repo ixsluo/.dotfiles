@@ -27,6 +27,7 @@
 # 4. Remove "# " in the head of remote_pattern
 # 5. Add conda env by ${CONDA_PROMPT_MODIFIER}
 # 6. Add git symbol ahead of branch name
+# 7. Remove virtual env
 
 # Set the full bash prompt.
 function set_bash_prompt () {
@@ -121,13 +122,13 @@ function set_bash_prompt () {
     }
 
     # Determine active Python virtualenv details.
-    function set_virtualenv () {
-      if test -z "$VIRTUAL_ENV" ; then
-          PYTHON_VIRTUALENV=""
-      else
-          PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${NC} "
-      fi
-    }
+    #function set_virtualenv () {
+    #  if test -z "$VIRTUAL_ENV" ; then
+    #      PYTHON_VIRTUALENV=""
+    #  else
+    #      PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${NC} "
+    #  fi
+    #}
 
     # keep variables local to not pollute global namespace.  bash is a rash
     local PYTHON_VIRTUALENV BRANCH PROMPT_SYMBOL CONDA_ENV
@@ -135,14 +136,21 @@ function set_bash_prompt () {
     set_prompt_symbol $?
 
     # Set PROMPT_SYMBOL first so we don't lose the return value of the last command.
-    set_virtualenv
+    #set_virtualenv
     set_git_branch
 
-    # prompt on same line as info
-    # add \u@\h for the hostname
-    PS1="${CONDA_PROMPT_MODIFIER}${LIGHT_GREEN}\u@\h${NC} ${PYTHON_VIRTUALENV}${BRANCH}${BLUE}\w${NC} ${PROMPT_SYMBOL} "
-
+    # set PS1
+    PS1="${CONDA_PROMPT_MODIFIER}${LIGHT_GREEN}\u@\h${NC} ${BRANCH}${BLUE}\w${NC} ${PROMPT_SYMBOL} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.
 PROMPT_COMMAND=set_bash_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
