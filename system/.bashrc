@@ -11,10 +11,6 @@ fi
 if test -f ~/.pathrc ; then
     source ~/.pathrc
 fi
-# load local setting which won't be synchronized
-if test -f ~/.localrc ; then
-    source ~/.localrc
-fi
 
 # If not running interactively, don't do anything
 case $- in
@@ -111,3 +107,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# load local setting which won't be synchronized
+if test -f ~/.localrc ; then
+    source ~/.localrc
+fi
