@@ -1,6 +1,0 @@
-set match-hidden-files off
-set completion-ignore-case on
-
-# quick search history command by providing part of it
-"\e[A":history-search-backward
-"\e[B":history-search-forward

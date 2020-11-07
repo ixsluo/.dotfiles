@@ -1,15 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # source global definitions
-if test -f /etc/bashrc ; then
-    source /etc/bashrc
-fi
-
-# load PATH
-if test -f ~/.pathrc ; then
-    source ~/.pathrc
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
 fi
 
 # If not running interactively, don't do anything
@@ -40,14 +33,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# use git prompt
-source ~/.git_prompt
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -61,25 +46,20 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+#alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
-fi
+#if [ -f ~/.aliases ]; then
+#    . ~/.aliases
+#fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -92,22 +72,66 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Define a few Colours
+BLACK='\e[0;30m'
+BLUE='\e[0;34m'
+GREEN='\e[0;32m'
+CYAN='\e[0;36m'
+RED='\e[0;31m'
+
+PURPLE='\e[0;35m'
+BROWN='\e[0;33m'
+LIGHTGRAY='\e[0;37m'
+DARKGRAY='\e[1;30m'
+LIGHTBLUE='\e[1;34m'
+LIGHTGREEN='\e[1;32m'
+LIGHTCYAN='\e[1;36m'
+LIGHTRED='\e[1;31m'
+LIGHTPURPLE='\e[1;35m'
+YELLOW='\e[1;33m'
+WHITE='\e[1;37m'
+NC='\e[0m' # No Color
+
+###########
+# Aliases #
+###########
+
+# ls
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+
+##################
+# WELCOME SCREEN #
+##################
+
+#clear
+echo ""
+echo -ne "Hello, $USER. today is, "; date
+source ~/.git_prompt
+
+
+
+# Applications
+alias glog="git log --decorate --oneline --graph --all"
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('~/apps/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "~/apps/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "~/apps/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="~/apps/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('~/apps/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "~/apps/miniconda3/etc/profile.d/conda.sh" ]; then
+#        . "~/apps/miniconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="~/apps/miniconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
 # <<< conda initialize <<<
 
 # load local setting which won't be synchronized
-if test -f ~/.localrc ; then
+if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
