@@ -97,7 +97,7 @@ NC='\e[0m' # No Color
 ###########
 
 # ls
-alias ll='ls -alF'
+alias ll='ls -lF'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -108,7 +108,7 @@ alias l='ls -CF'
 
 #clear
 echo ""
-echo -ne "Hello, $USER. today is, "; date
+#echo -ne "Hello, $USER. today is, "; date
 source ~/.git_prompt
 
 

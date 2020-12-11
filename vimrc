@@ -7,6 +7,16 @@ filetype on
 
 
 " ==============
+" Format
+" ai, ci, si   atuoindent, cindent, smartindent
+" sw           shiftwidth   # indent in new line or indent with '<, >'
+" ts           tabstop      # to convert space to a tab
+" sts          softtabstop  # to insert a <tab> key
+" ==============
+autocmd FileType bash,python set et ai sw=4 ts=4 sts=4
+
+
+" ==============
 " Beheaver
 " ==============
 "set paste
