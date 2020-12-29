@@ -30,29 +30,29 @@ command_test(){
 
 # test wget
 command_test wget
-if [ $? == 1 ] ; then
-    echo "sudo $np install wget"
+if [ "$?" -eq "1" ] ; then
+    echo "sudo $pm install wget"
 fi
 
 # test git
 command_test git
-if [ $? == 1 ] ; then
+if [ "$?" -eq "1" ] ; then
     echo "sudo $pm install git"
 fi
 
 # test commitizen
 command_test commitizen
-if [ $? == 1 ] ; then
+if [ "$?" -eq "1" ] ; then
     # commitizen not installed
     command_test npm
-    if [ $? == 1 ] ; then
+    if [ "$?" -eq "1" ] ; then
         echo "sudo $pm install npm"
     fi
 fi
 
 # test conda
 command_test conda
-if [ $? == 1 ] ; then
+if [ "$?" -eq "1" ] ; then
     # conda not installed
     echo ""
 fi

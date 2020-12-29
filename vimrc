@@ -1,6 +1,6 @@
-" ==============
-" Syntax
-" ==============
+" ##########
+" # Syntax #
+" ##########
 syntax on
 set nocompatible
 filetype on
@@ -16,16 +16,16 @@ filetype on
 autocmd FileType bash,python set et ai sw=4 ts=4 sts=4
 
 
-" ==============
-" Beheaver
-" ==============
+" ############
+" # Beheaver #
+" ############
 "set paste
 set backspace=2
 
 
-" ==============
-" UI
-" ==============
+" ######
+" # UI #
+" ######
 set nu
 set relativenumber
 let &colorcolumn=81
@@ -41,9 +41,9 @@ hi NonText      ctermbg=black    ctermfg=black
 hi LineNr       ctermbg=black    ctermfg=grey
 
 
-" ==============
-" Special Nonprintable characters
-" ==============
+" ###################################
+" # Special Nonprintable characters #
+" ###################################
 set list
 " for list and listchars
 scriptencoding utf-8
@@ -56,16 +56,16 @@ set listchars=tab:›-,trail:¬,precedes:«,extends:»
 hi SpecialKey ctermfg=darkgrey
 
 
-" ==============
-" Jump to the last position when reopening
-" ==============
+" ############################################
+" # Jump to the last position when reopening #
+" ############################################
 " Notice   !g`\! rather than !g'\!
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 
-" ==============
-" Bracket auto-complete
-" ==============
+" #########################
+" # Bracket auto-complete #
+" #########################
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
