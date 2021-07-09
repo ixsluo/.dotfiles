@@ -1,31 +1,46 @@
-" ##########
-" # Syntax #
-" ##########
-syntax on
 set nocompatible
+
+" plug-vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+Plug 'davidhalter/jedi-vim'
+
+call plug#end()
+
+" Plug configuration
+let g:SuperTabDefaultCompletionType = "context"
+""""""""""""""""""""
+let g:jedi#completions_enabled=1
+let g:jedi#popup_on_dot=0
+
+
+" Syntax
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
 filetype on
+hi pythonSelf ctermfg=174 guifg=#6094DB cterm=bold gui=bold
 
 
-" ==============
 " Format
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ai, ci, si   atuoindent, cindent, smartindent
 " sw           shiftwidth   # indent in new line or indent with '<, >'
 " ts           tabstop      # to convert space to a tab
 " sts          softtabstop  # to insert a <tab> key
-" ==============
 autocmd FileType bash,python set et ai sw=4 ts=4 sts=4
+autocmd FileType python nnoremap <leader>s :!isort %<CR><CR>
 
 
-" ############
-" # Beheaver #
-" ############
+" Beheaver
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set paste
-set backspace=2
+"set backspace=2
+set backspace=eol,start
 
 
-" ######
-" # UI #
-" ######
+" UI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nu
 "set relativenumber
 let &colorcolumn=81
@@ -39,11 +54,11 @@ set statusline=%F%m%r%h%w\ [%Y]\ %{&ff}\ »%=«\ %{\"\".(&fenc==\"\"?&enc:&fenc)
 set t_Co=256  " terminal support 256 color
 hi NonText      ctermbg=black    ctermfg=black
 hi LineNr       ctermbg=black    ctermfg=grey
+hi EndOfBuffer  term=bold
 
 
-" ###################################
-" # Special Nonprintable characters #
-" ###################################
+" Special Nonprintable characters
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set list
 " for list and listchars
 scriptencoding utf-8
@@ -56,28 +71,26 @@ set listchars=tab:›-,trail:¬,precedes:«,extends:»
 hi SpecialKey ctermfg=darkgrey
 
 
-" ############################################
-" # Jump to the last position when reopening #
-" ############################################
+" Jump to the last position when reopening
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Notice   !g`\! rather than !g'\!
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 
-" #########################
-" # Bracket auto-complete #
-" #########################
+" Bracket auto-complete
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 inoremap < <><ESC>i
-"inoremap " ""<ESC>i
-"inoremap ' ''<ESC>i
+" inoremap " ""<ESC>i
+" inoremap ' ''<ESC>i
 
 function! RemovePairs()
     let s:line = getline(".")
     let s:previous_char = s:line[col(".")-1]
 
-    if index(["(","[","{"],s:previous_char) != -1
+    if index(["(","[","{"], s:previous_char) != -1
         let l:original_pos = getpos(".")
         execute "normal %"
         let l:new_pos = getpos(".")
@@ -115,3 +128,15 @@ inoremap ] <ESC>:call RemoveNextDoubleChar(']')<CR>a
 inoremap } <ESC>:call RemoveNextDoubleChar('}')<CR>a
 inoremap > <ESC>:call RemoveNextDoubleChar('>')<CR>a
 
+
+" Quick Run
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+	exec "w"
+	if &filetype == 'python'
+		exec "!time /usr/bin/env python %"
+	elseif &filetype == 'sh'
+		:!time bash %
+	endif
+endfunc
