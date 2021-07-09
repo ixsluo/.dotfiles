@@ -82,7 +82,7 @@ done
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -132,3 +132,7 @@ if [ -f ~/.localrc ]; then
     source ~/.localrc
 fi
 
+echo "Loading iTerm2 shell integration..."; \
+test -e /Users/luoxs/.iterm2_shell_integration.zsh \
+  && source /Users/luoxs/.iterm2_shell_integration.zsh \
+  && echo "Done" || true
