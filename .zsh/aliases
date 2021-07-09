@@ -1,1 +1,8 @@
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/.git/ --work-tree=$HOME'
+alias path='echo $PATH  | sed "s/:/\n/g"'
+
+#proxy_addr="http://127.0.0.1:8118"
+proxy_addr="socks5://127.0.0.1:1080"
+
+alias proxy="export all_proxy=$proxy_addr"
+alias unproxy="unset all_proxy"
