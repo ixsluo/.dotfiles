@@ -3,19 +3,25 @@ set nocompatible
 " plug-vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-
 Plug 'davidhalter/jedi-vim'
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'lervag/vimtex'
-
+Plug 'w0rp/ale'
 call plug#end()
 
-" Plug configuration
+
 let g:SuperTabDefaultCompletionType = "context"
+" Plug configuration
 """"""""""""""""""""
-let g:jedi#completions_enabled=1
-let g:jedi#popup_on_dot=0
+let g:jedi#completions_enabled = 1
+let g:jedi#popup_on_dot = 0
+let g:ale_fixers = {
+	\ 'python': ['yapf', 'isort'],
+	\ }
+
+" Shortcuts
+nnoremap <F2> :ALEFix<CR>
 
 
 " Syntax
@@ -33,7 +39,7 @@ hi pythonSelf ctermfg=174 guifg=#6094DB cterm=bold gui=bold
 " sts          softtabstop  # to insert a <tab> key
 autocmd FileType bash,python set et ai sw=4 ts=4 sts=4
 "autocmd FileType python nnoremap <leader>t :!isort %<CR><CR>
-autocmd FileType python nnoremap <F2> :!isort %<CR><CR>
+"autocmd FileType python nnoremap <F2> :!isort %<CR><CR>
 
 
 " Beheaver
