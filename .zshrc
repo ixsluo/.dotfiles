@@ -133,6 +133,6 @@ if [ -f ~/.localrc ]; then
 fi
 
 echo "Loading iTerm2 shell integration..."; \
-test -e /Users/luoxs/.iterm2_shell_integration.zsh \
-  && source /Users/luoxs/.iterm2_shell_integration.zsh \
-  && echo "Done" || true
+test -e ~/.iterm2_shell_integration.zsh \
+  && source ~/.iterm2_shell_integration.zsh \
+  && echo "Done" || echo "Fail"

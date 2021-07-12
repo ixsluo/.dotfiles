@@ -10,3 +10,5 @@ fi
 
 # User specific environment and startup programs
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+test -e ~/.iterm2_shell_integration.bash && source ~/.iterm2_shell_integration.bash || true
