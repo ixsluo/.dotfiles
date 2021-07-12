@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'davidhalter/jedi-vim'
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
+Plug 'lervag/vimtex'
 
 call plug#end()
 
