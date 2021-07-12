@@ -32,7 +32,8 @@ hi pythonSelf ctermfg=174 guifg=#6094DB cterm=bold gui=bold
 " ts           tabstop      # to convert space to a tab
 " sts          softtabstop  # to insert a <tab> key
 autocmd FileType bash,python set et ai sw=4 ts=4 sts=4
-autocmd FileType python nnoremap <leader>s :!isort %<CR><CR>
+"autocmd FileType python nnoremap <leader>t :!isort %<CR><CR>
+autocmd FileType python nnoremap <F2> :!isort %<CR><CR>
 
 
 " Beheaver
